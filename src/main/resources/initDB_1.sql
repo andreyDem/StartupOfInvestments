@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS USERS (
   NAME    VARCHAR(50)                    NOT NULL,
   SURNAME VARCHAR(50)                    NOT NULL,
   ADRESS  VARCHAR(100)                   NOT NULL,
-  PHONE   INT                            NOT NULL
+  PHONE   INT                            NOT NULL,
+  ROLE    VARCHAR(25)                    NOT NULL
 )
   ENGINE InnoDB;
 
@@ -34,10 +35,12 @@ CREATE TABLE IF NOT EXISTS PROJECT_OWNERS (
   ENGINE InnoDB;
 
 CREATE TABLE IF NOT EXISTS INVESTMENTS (
-  ID      INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  SUM     INT                            NOT NULL,
-  USER_ID INT                            NOT NULL,
+  ID         INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  SUM        INT                            NOT NULL,
+  USER_ID    INT                            NOT NULL,
+  PROJECT_ID INT                            NOT NULL,
 
-  FOREIGN KEY (USER_ID) REFERENCES USERS (ID)
+  FOREIGN KEY (USER_ID) REFERENCES USERS (ID),
+  FOREIGN KEY (PROJECT_ID) REFERENCES PROJECTS (ID)
 )
   ENGINE InnoDB;
