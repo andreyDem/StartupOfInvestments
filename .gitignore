@@ -1,0 +1,9 @@
+.gradle/
+.idea/**
+build/
+gradlew
+!build/classes/main
+*.class
+out/
+!out/production/JavaAndroid
+*.iml
