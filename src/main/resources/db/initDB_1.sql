@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS USERS (
   ID      INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   NAME    VARCHAR(50)                    NOT NULL,
   SURNAME VARCHAR(50)                    NOT NULL,
-  ADRESS  VARCHAR(100)                   NOT NULL,
+  ADDRESS  VARCHAR(100)                   NOT NULL,
   PHONE   INT                            NOT NULL,
   ROLE    VARCHAR(25)                    NOT NULL
 )
