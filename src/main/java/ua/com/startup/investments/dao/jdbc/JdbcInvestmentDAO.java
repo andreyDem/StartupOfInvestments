@@ -1,7 +1,7 @@
 package ua.com.startup.investments.dao.jdbc;
 
 import org.jboss.logging.Logger;
-import org.slf4j.Logger;
+//import org.slf4j.Logger;
 import ua.com.startup.investments.dao.InvestmentDAO;
 import ua.com.startup.investments.entities.Investment;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class JdbcInvestmentDAO implements InvestmentDAO {
 
-    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JdbcUsersDAO.class);
+  //  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JdbcUsersDAO.class);
 
 
     private static final String CREATE = "INSERT INTO INVESTMENTS (PRICE) VALUE (?)";
