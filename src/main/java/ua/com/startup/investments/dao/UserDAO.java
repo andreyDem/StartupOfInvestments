@@ -5,6 +5,13 @@ import ua.com.startup.investments.entities.User;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The interface for working with data base and entity
+ * The interface will be implemented by DAO classes that will work with User entity
+ *
+ * @author Girya Aleksey
+ */
+
 public interface UserDAO<T> {
     /**
      * Method for creating a new entity in a database

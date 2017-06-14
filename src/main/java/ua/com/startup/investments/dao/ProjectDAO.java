@@ -6,6 +6,13 @@ import ua.com.startup.investments.entities.Project;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The interface for working with data base and entity
+ * The interface will be implemented by DAO classes that will work with Project entity
+ *
+ * @author Girya Aleksey
+ */
+
 public interface ProjectDAO<T> {
 
     /**

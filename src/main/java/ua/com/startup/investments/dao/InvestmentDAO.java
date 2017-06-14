@@ -5,6 +5,13 @@ import ua.com.startup.investments.entities.Investment;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The interface for working with data base and entity
+ * The interface will be implemented by DAO classes that will work with Investment entity
+ *
+ * @author Girya Aleksey
+ */
+
 public interface InvestmentDAO<T> {
 
     /**
