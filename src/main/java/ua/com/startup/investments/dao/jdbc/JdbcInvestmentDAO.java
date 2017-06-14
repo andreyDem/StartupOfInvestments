@@ -58,38 +58,39 @@ public class JdbcInvestmentDAO implements InvestmentDAO {
 
     private static final String FIND_ALL = "";
 
+
     @Override
-    public void createInvestments(Serializable investments) {
+    public void createInvestments(Object investments) {
 
     }
 
     @Override
-    public Investment findById(Serializable id) {
+    public Investment findById(Object id) {
         return null;
     }
 
     @Override
-    public Investment findByUser(Serializable id) {
+    public Investment findByUser(Object id) {
         return null;
     }
 
     @Override
-    public Investment findByPrice(Serializable price) {
+    public Investment findByPrice(Object price) {
         return null;
     }
 
     @Override
-    public Investment findByProject(Serializable id) {
+    public Investment findByProject(Object id) {
         return null;
     }
 
     @Override
-    public void update(Serializable id) {
+    public void update(Object id) {
 
     }
 
     @Override
-    public void delete(Serializable id) {
+    public void delete(Object id) {
 
     }
 

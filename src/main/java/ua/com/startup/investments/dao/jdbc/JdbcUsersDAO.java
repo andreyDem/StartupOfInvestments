@@ -10,28 +10,29 @@ import java.util.List;
  * Created by Aleksey on 13.06.2017.
  */
 public class JdbcUsersDAO implements UserDAO {
+
     @Override
-    public void createUser(Serializable user) {
+    public void createUser(Object user) {
 
     }
 
     @Override
-    public User findById(Serializable id) {
+    public User findById(Object id) {
         return null;
     }
 
     @Override
-    public User findByName(Serializable name) {
+    public User findByName(Object name) {
         return null;
     }
 
     @Override
-    public void update(Serializable id) {
+    public void update(Object id) {
 
     }
 
     @Override
-    public void delete(Serializable id) {
+    public void delete(Object id) {
 
     }
 

@@ -10,28 +10,29 @@ import java.util.List;
  * Created by Aleksey on 13.06.2017.
  */
 public class JdbcProjectsDAO implements ProjectDAO{
+
     @Override
-    public void createProject(Serializable project) {
+    public void createProject(Object project) {
 
     }
 
     @Override
-    public Project findById(Serializable id) {
+    public Project findById(Object id) {
         return null;
     }
 
     @Override
-    public Project findByName(Serializable name) {
+    public Project findByName(Object name) {
         return null;
     }
 
     @Override
-    public void update(Serializable id) {
+    public void update(Object id) {
 
     }
 
     @Override
-    public void delete(Serializable id) {
+    public void delete(Object id) {
 
     }
 

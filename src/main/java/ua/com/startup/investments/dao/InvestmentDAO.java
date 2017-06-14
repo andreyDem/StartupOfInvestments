@@ -5,7 +5,7 @@ import ua.com.startup.investments.entities.Investment;
 import java.io.Serializable;
 import java.util.List;
 
-public interface InvestmentDAO<T extends Serializable> {
+public interface InvestmentDAO<T> {
 
     /**
      * Method for creating a new entity in a database

@@ -6,7 +6,7 @@ import ua.com.startup.investments.entities.Project;
 import java.io.Serializable;
 import java.util.List;
 
-public interface ProjectDAO<T extends Serializable> {
+public interface ProjectDAO<T> {
 
     /**
      * Method for creating a new entity in a database

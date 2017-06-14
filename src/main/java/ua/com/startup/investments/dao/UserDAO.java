@@ -5,7 +5,7 @@ import ua.com.startup.investments.entities.User;
 import java.io.Serializable;
 import java.util.List;
 
-public interface UserDAO<T extends Serializable> {
+public interface UserDAO<T> {
     /**
      * Method for creating a new entity in a database
      *
