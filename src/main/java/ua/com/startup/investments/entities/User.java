@@ -11,11 +11,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
-
-    /**
-     * Display the unique identifier for each user.
-     */
+public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,6 +44,7 @@ public class User implements Serializable{
     /**
      * Display the identifier for each user role.
      */
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Roles role;
 
