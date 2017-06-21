@@ -1,39 +1,35 @@
+# --Create DB investments.
 DROP DATABASE IF EXISTS INVESTMENTS;
 CREATE DATABASE IF NOT EXISTS INVESTMENTS
   DEFAULT CHARACTER SET utf8
   COLLATE utf8_general_ci;
 USE INVESTMENTS;
 
+# --Create table of users.
+CREATE TABLE IF NOT EXISTS USERS (
+  ID      INT(25) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  NAME    VARCHAR(50)                        NOT NULL,
+  SURNAME VARCHAR(50)                        NOT NULL,
+  ADDRESS VARCHAR(100)                       NOT NULL,
+  PHONE   INT(25)                            NOT NULL,
+  ROLE    VARCHAR(25)                        NOT NULL
+)
+  ENGINE InnoDB;
+
+# --Create table of projects.
 CREATE TABLE IF NOT EXISTS PROJECTS (
   ID            INT PRIMARY KEY AUTO_INCREMENT AUTO_INCREMENT,
   NAME          VARCHAR(100) NOT NULL,
   SOLUTION      VARCHAR(500) NOT NULL,
   FINAL_COST    INT(25)      NOT NULL,
   ASSEMBLE_COST INT(25)      NOT NULL,
-  OWNER         VARCHAR(50)  NOT NULL
-)
-  ENGINE InnoDB;
+  ID_USER       INT(25)      NOT NULL,
 
-CREATE TABLE IF NOT EXISTS USERS (
-  ID      INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  NAME    VARCHAR(50)                    NOT NULL,
-  SURNAME VARCHAR(50)                    NOT NULL,
-  ADDRESS VARCHAR(100)                   NOT NULL,
-  PHONE   INT(25)                        NOT NULL,
-  ROLE    VARCHAR(25)                    NOT NULL
-)
-  ENGINE InnoDB;
-
-CREATE TABLE IF NOT EXISTS PROJECT_OWNERS (
-  ID         INT(25) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  ID_PROJECT INT(25)                            NOT NULL,
-  ID_USER    INT(25)                            NOT NULL,
-
-  FOREIGN KEY (ID_PROJECT) REFERENCES PROJECTS (ID),
   FOREIGN KEY (ID_USER) REFERENCES USERS (ID)
 )
   ENGINE InnoDB;
 
+# --Create table of investments.
 CREATE TABLE IF NOT EXISTS INVESTMENTS (
   ID  INT(25) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   SUM INT(25)                            NOT NULL
@@ -41,6 +37,7 @@ CREATE TABLE IF NOT EXISTS INVESTMENTS (
 
   ENGINE InnoDB;
 
+# --Create join table of investments and project.
 CREATE TABLE IF NOT EXISTS INVESTMENTS_PROJECTS (
   ID             INT(25) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   ID_INVESTMENTS INT(25)                            NOT NULL,
@@ -51,6 +48,7 @@ CREATE TABLE IF NOT EXISTS INVESTMENTS_PROJECTS (
 )
   ENGINE InnoDB;
 
+# --Create join table of investments and users.
 CREATE TABLE IF NOT EXISTS INVESTMENTS_USERS (
   ID             INT(25) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   ID_INVESTMENTS INT(25)                            NOT NULL,

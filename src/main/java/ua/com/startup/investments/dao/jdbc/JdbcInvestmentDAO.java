@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * The class implements a set of methods for working
- * with database, with Company entity.
+ * with database, with Investment entity.
  *
  * @author Girya Aleksey
  */
@@ -21,36 +21,36 @@ public class JdbcInvestmentDAO implements InvestmentDAO {
      * A pattern of an SQL command (without particular values)
      * for saving a investment in a database
      */
-    private static final String CREATE = "INSERT INTO INVESTMENTS (PRICE) VALUE (?)";
+    private static final String CREATE = "INSERT INTO INVESTMENTS (SUM) VALUE (?)";
 
     /**
      * A pattern of an SQL command (without particular value)
-     * for finding a investment in a database by id
+     * for finding a investment in a database by id od investments
      */
-    private static final String FIND_BY_ID = "SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT, PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, OWNER, PROJECTS.NAME, SURNAME\n" +
+    private static final String FIND_BY_ID = "SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT, \n" +
+            "  PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, PROJECTS.NAME, SURNAME\n" +
             "FROM investments INVESTMENTS\n" +
             "  JOIN investments_projects I_P ON INVESTMENTS.ID = I_P.ID_INVESTMENTS\n" +
             "  JOIN projects PROJECTS ON I_P.ID_PROJECT = PROJECTS.ID\n" +
-            "  JOIN investments_users I_U ON INVESTMENTS.ID = I_U.ID_INVESTMENTS\n" +
-            "  JOIN users USERS ON I_U.ID_USER = USERS.ID;";
+            "  JOIN users USERS ON PROJECTS.ID_USER = USERS.ID;";
 
     /**
      * A pattern of an SQL command (without particular value)
      * for finding a investment in a database by user id
      */
-    private static final String FIND_BY_USER = "SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT, PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, OWNER, PROJECTS.NAME, SURNAME\n" +
+    private static final String FIND_BY_USER_ID = "SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT,\n" +
+            "  PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, PROJECTS.NAME, SURNAME\n" +
             "FROM investments INVESTMENTS\n" +
             "  JOIN investments_projects I_P ON INVESTMENTS.ID = I_P.ID_INVESTMENTS\n" +
             "  JOIN projects PROJECTS ON I_P.ID_PROJECT = PROJECTS.ID\n" +
-            "  JOIN investments_users I_U ON INVESTMENTS.ID = I_U.ID_INVESTMENTS\n" +
-            "  JOIN users USERS ON I_U.ID_USER = USERS.ID\n" +
+            "  JOIN users USERS ON PROJECTS.ID_USER = USERS.ID\n" +
             "WHERE USERS.ID = ?";
 
     /**
      * A pattern of an SQL command (without particular value)
-     * for finding a investment in a database by sum of investment
+     * for finding a investment in a database by user name
      */
-    private static final String FIND_BY_PRICE = "SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT, PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, OWNER, PROJECTS.NAME, SURNAME\n" +
+    private static final String FIND_BY_USER_NAME = "SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT, PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, OWNER, PROJECTS.NAME, SURNAME\n" +
             "FROM investments INVESTMENTS\n" +
             "  JOIN investments_projects I_P ON INVESTMENTS.ID = I_P.ID_INVESTMENTS\n" +
             "  JOIN projects PROJECTS ON I_P.ID_PROJECT = PROJECTS.ID\n" +
@@ -60,9 +60,21 @@ public class JdbcInvestmentDAO implements InvestmentDAO {
 
     /**
      * A pattern of an SQL command (without particular value)
-     * for finding a investment in a database by project name
+     * for finding a investment in a database by sum of investment
      */
-    private static final String FIND_BY_PROJECT = " SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT, PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, OWNER, PROJECTS.NAME, SURNAME\n" +
+    private static final String FIND_BY_PRICE = "SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT,\n" +
+            "  PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, PROJECTS.NAME, SURNAME\n" +
+            "FROM investments INVESTMENTS\n" +
+            "  JOIN investments_projects I_P ON INVESTMENTS.ID = I_P.ID_INVESTMENTS\n" +
+            "  JOIN projects PROJECTS ON I_P.ID_PROJECT = PROJECTS.ID\n" +
+            "  JOIN users USERS ON PROJECTS.ID_USER = USERS.ID\n" +
+            "WHERE INVESTMENTS.SUM = ?;";
+
+    /**
+     * A pattern of an SQL command (without particular value)
+     * for finding a investment in a database by investment name
+     */
+    private static final String FIND_BY_PROJECT_NAME = " SELECT INVESTMENTS.ID ID_INVESTMENT, INVESTMENTS.SUM SUM_INVESTMENT, ID_PROJECT ID_PROJECT, PROJECTS.NAME PROJECT_NAME, FINAL_COST, ASSEMBLE_COST, OWNER, PROJECTS.NAME, SURNAME\n" +
             "FROM investments INVESTMENTS\n" +
             "  JOIN investments_projects I_P ON INVESTMENTS.ID = I_P.ID_INVESTMENTS\n" +
             "  JOIN projects PROJECTS ON I_P.ID_PROJECT = PROJECTS.ID\n" +
@@ -74,18 +86,24 @@ public class JdbcInvestmentDAO implements InvestmentDAO {
      * A pattern of an SQL command (without particular values)
      * for update a investment in a database
      */
-    private static final String UPDATE = "";
+    private static final String UPDATE = "UPDATE investments SET  SUM = ? WHERE ID = ?;";
 
     /**
      * A pattern of an SQL command (without particular value)
      * for removing an investment from a database by id
      */
-    private static final String DELETE = "";
+    private static final String DELETE = "DELETE FROM investments WHERE ID = ?;";
 
     /**
-     * An SQL command for getting all investment from a database
+     * An SQL command for getting all investments from a database
      */
-    private static final String FIND_ALL = "";
+    private static final String FIND_ALL = "SELECT * FROM investments;";
+
+    /**
+     * A pattern of an SQL command  for finding a id from the last
+     * inserted investment in a database
+     */
+    private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
 
 
     @Override
