@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 
-public interface UserDAO<T, ID extends Serializable> {
+public interface UserDAO<T, H, ID> {
     /**
      * Method for creating a new entity in a database
      *
@@ -35,7 +35,7 @@ public interface UserDAO<T, ID extends Serializable> {
      * @param name the id of an entity
      * @return founded entity of User
      */
-    User findByName(T name);
+    User findByName(H name);
 
     /**
      * Method for updating entity in a database

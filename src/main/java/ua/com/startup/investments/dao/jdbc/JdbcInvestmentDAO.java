@@ -3,6 +3,9 @@ package ua.com.startup.investments.dao.jdbc;
 import ua.com.startup.investments.dao.InvestmentDAO;
 import ua.com.startup.investments.entities.Investment;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 //import org.slf4j.Logger;
@@ -15,7 +18,7 @@ import java.util.List;
  */
 public class JdbcInvestmentDAO implements InvestmentDAO {
 
-  //  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JdbcUsersDAO.class);
+    //  private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JdbcUsersDAO.class);
 
     /**
      * A pattern of an SQL command (without particular values)
@@ -105,10 +108,15 @@ public class JdbcInvestmentDAO implements InvestmentDAO {
      */
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
 
+    private DataSource dataSource;
 
     @Override
     public void createInvestments(Object investments) {
 
+        try (Connection connection = dataSource.getConnection();) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

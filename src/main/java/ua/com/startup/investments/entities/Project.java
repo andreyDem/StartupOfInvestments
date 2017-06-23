@@ -20,7 +20,7 @@ public class Project implements Serializable{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     /**
      * Display the name of the project
@@ -81,7 +81,7 @@ public class Project implements Serializable{
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
