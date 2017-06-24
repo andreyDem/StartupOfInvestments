@@ -24,11 +24,6 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JdbcUsersDAO.class);
 
     /**
-     * Connection to database
-     */
-    private DataSource dataSource;
-
-    /**
      * A pattern of an SQL command (without particular values)
      * for saving an user in a database
      */
@@ -63,6 +58,11 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
      * for finding all orders in a database by id
      */
     private static final String FIND_ALL = "SELECT * FROM users";
+
+    /**
+     * Connection to database
+     */
+    private DataSource dataSource;
 
     /**
      * Method saves a new user in database
@@ -116,7 +116,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     }
 
     /**
-     * Method which find current user by id
+     * Method which find current user by name
      *
      * @param name the name of a user
      * @return a user with entered id
@@ -169,7 +169,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     /**
      * Method removes an user from database
      *
-     * @param id component which must be removed
+     * @param id user which must be removed
      */
     @Override
     public void delete(Integer id) {
@@ -202,7 +202,6 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
                         resultSet.getString("ADDRESS"),
                         resultSet.getInt("PHONE"),
                         (Roles) resultSet.getObject("ROLE"))
-
                 );
             }
         } catch (SQLException e) {

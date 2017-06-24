@@ -8,11 +8,11 @@ import java.io.Serializable;
  * The class implements a set of standard methods for working
  * with entity of the Project.
  *
- * @author Вадим
+ * @author Aleksey Girya
  */
 @Entity
 @Table(name = "projects")
-public class Project implements Serializable{
+public class Project implements Serializable {
 
     /**
      * Display the unique identifier for each project.
@@ -49,8 +49,8 @@ public class Project implements Serializable{
     /**
      * Display the owner of the project
      */
-    @Column(name = "owner")
-    private String owner;
+    @Column(name = "id_user")
+    private Integer idUser;
 
     /**
      * The default constructor of entities project.
@@ -60,20 +60,22 @@ public class Project implements Serializable{
 
     /**
      * Constructor
-     * @param id a unique identifier for project.
-     * @param name of the project
-     * @param solution contains description of the project
-     * @param finalCost display an information about final cost of the project
+     *
+     * @param id           a unique identifier for project.
+     * @param name         of the project
+     * @param solution     contains description of the project
+     * @param finalCost    display an information about final cost of the project
      * @param assembleCost display an information about assemble cost of the project
-     * @param owner display an information about owner of the project
+     * @param idUser       display an information about owner of the project
      */
-    public Project(int id, String name, String solution, int finalCost, int assembleCost, String owner) {
+    public Project(int id, String name, String solution, int finalCost, int assembleCost, Integer idUser) {
         this.name = name;
         this.solution = solution;
         this.finalCost = finalCost;
         this.assembleCost = assembleCost;
-        this.owner = owner;
+        this.idUser = idUser;
     }
+
     /**
      * Getters and setters methods by all fields of project.
      */
@@ -117,35 +119,34 @@ public class Project implements Serializable{
         this.assembleCost = assembleCost;
     }
 
-    public String getOwner() {
-        return owner;
+    public Integer getIdUser() {
+        return idUser;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     /**
      * Indicates whether some other object is "equal to" this one.
      *
-     * @param proj the reference object with which to compare.
+     * @param o the reference object with which to compare.
      * @return Returns true if this user is the same as the object
      * argument, otherwise returns false.
      */
-
     @Override
-    public boolean equals(Object proj) {
-        if (this == proj) return true;
-        if (!(proj instanceof Project)) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Project)) return false;
 
-        Project project = (Project) proj;
+        Project project = (Project) o;
 
         if (getId() != project.getId()) return false;
         if (getFinalCost() != project.getFinalCost()) return false;
         if (getAssembleCost() != project.getAssembleCost()) return false;
         if (!getName().equals(project.getName())) return false;
         if (!getSolution().equals(project.getSolution())) return false;
-        return getOwner().equals(project.getOwner());
+        return getIdUser().equals(project.getIdUser());
     }
 
     /**
@@ -155,14 +156,15 @@ public class Project implements Serializable{
      */
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = (int) getId();
         result = 31 * result + getName().hashCode();
         result = 31 * result + getSolution().hashCode();
         result = 31 * result + getFinalCost();
         result = 31 * result + getAssembleCost();
-        result = 31 * result + getOwner().hashCode();
+        result = 31 * result + getIdUser().hashCode();
         return result;
     }
+
     /**
      * Returns a string representation of the project.
      */
@@ -173,7 +175,7 @@ public class Project implements Serializable{
                 ", name='" + name + '\'' +
                 ", finalCost=" + finalCost +
                 ", assembleCost=" + assembleCost +
-                ", owner='" + owner + '\'' +
+                ", owner='" + idUser + '\'' +
                 '}';
     }
 }
