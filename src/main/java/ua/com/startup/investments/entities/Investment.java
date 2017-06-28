@@ -34,6 +34,10 @@ public class Investment implements Serializable {
     public Investment() {
     }
 
+    public Investment(int sum) {
+        this.sum = sum;
+    }
+
     /**
      * Constructor
      *

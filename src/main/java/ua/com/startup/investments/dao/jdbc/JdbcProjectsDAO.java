@@ -94,7 +94,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
      *
      * @param id the id of a project
      * @return a project by entered id
-     * or new user with empty parameters if component with this id does not exist
+     * or new project with empty parameters if project with this id does not exist
      */
     @Override
     public Project findById(Integer id) {
@@ -126,7 +126,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
      *
      * @param name the name of a user
      * @return a user with entered id
-     * or new user with empty parameters if component with this id does not exist
+     * or new user with empty parameters if project with this id does not exist
      */
     @Override
     public Project findByName(String name) {

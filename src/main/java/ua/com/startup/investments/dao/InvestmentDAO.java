@@ -12,7 +12,7 @@ import java.util.List;
  * @author Girya Aleksey
  */
 
-public interface InvestmentDAO<T> {
+public interface InvestmentDAO<T, ID> {
 
     /**
      * Method for creating a new entity in a database
@@ -27,15 +27,15 @@ public interface InvestmentDAO<T> {
      * @param id the id of an entity
      * @return founded entity of Investment
      */
-    Investment findById(T id);
+    Investment findById(ID id);
 
     /**
      * Method for finding entity in a database by id
      *
-     * @param id the id of an entity
+     * @param id_user the id of an entity
      * @return founded entity of Investment
      */
-    Investment findByUser(T id);
+    Investment findByUser(ID id_user);
 
     /**
      * Method for finding entity in a database by id
@@ -43,7 +43,7 @@ public interface InvestmentDAO<T> {
      * @param price of the entity
      * @return founded by price entity of Investment
      */
-    Investment findByPrice(T price);
+    Investment findByPrice(ID price);
 
     /**
      * Method for finding entity in a database by id
@@ -51,7 +51,7 @@ public interface InvestmentDAO<T> {
      * @param id of the entity Project
      * @return founded by id project entity of Investment
      */
-    Investment findByProject(T id);
+    Investment findByProject(ID id);
 
     /**
      * Method for updating entity in a database
@@ -65,7 +65,7 @@ public interface InvestmentDAO<T> {
      *
      * @param id an entity for delete from DB
      */
-    void delete(T id);
+    void delete(ID id);
 
     /**
      * Method for getting all entities of a certain type
