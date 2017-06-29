@@ -13,13 +13,13 @@ import java.util.List;
  */
 
 
-public interface UserDAO<T, ID extends Serializable> {
+public interface UserDAO {
     /**
      * Method for creating a new entity in a database
      *
      * @param user an entity for saving in a database
      */
-    void createUser(T user);
+    void save(User user);
 
     /**
      * Method for finding entity in a database by id
@@ -27,7 +27,7 @@ public interface UserDAO<T, ID extends Serializable> {
      * @param id the id of an entity
      * @return founded entity of User
      */
-    User findById(ID id);
+    User findById(Long id);
 
     /**
      * Method for finding entity in a database by id
@@ -35,26 +35,26 @@ public interface UserDAO<T, ID extends Serializable> {
      * @param name the id of an entity
      * @return founded entity of User
      */
-    User findByName(T name);
+    User findByName(String name);
 
     /**
      * Method for updating entity in a database
      *
-     * @param id an entity with new parameters for updating
+     * @param user an entity with new parameters for updating
      */
-    void update(ID id);
+    void update(User user);
 
     /**
      * Method for deleting entity in a database
      *
-     * @param id an entity for delete from DB
+     * @param user an entity for delete from DB
      */
-    void delete(ID id);
+    void delete(User user);
     
     /**
      * Method for getting all entities of a certain type
      *
      * @return list of entities
      */
-    List<T> findAll();
+    List<User> findAll();
 }
