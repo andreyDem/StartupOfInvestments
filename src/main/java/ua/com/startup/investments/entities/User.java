@@ -39,7 +39,7 @@ public class User {
      * Display the phone number of the user
      */
     @Column(name = "phone")
-    private int phone;
+    private Integer phone;
 
     /**
      * Display the identifier for each user role.
@@ -63,13 +63,25 @@ public class User {
      * @param phone display phone number of user
      * @param role display role of user
      */
-    public User(int id, String name, String surname, String address, int phone, Roles role) {
+    public User(long id, String name, String surname, String address, Integer phone, Roles role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.phone = phone;
         this.role = role;
+    }
+
+    public User(long id, String name, String surname, Integer phone) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+    }
+
+    public User(long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     /**
@@ -123,11 +135,11 @@ public class User {
         this.address = address;
     }
 
-    public int getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 
