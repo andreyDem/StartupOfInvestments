@@ -20,7 +20,7 @@ public class Project implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     /**
      * Display the name of the project
@@ -38,13 +38,13 @@ public class Project implements Serializable {
      * Display finak cost of the project
      */
     @Column(name = "final_cost")
-    private int finalCost;
+    private Integer finalCost;
 
     /**
      * Display assemble cost of the project
      */
     @Column(name = "assemble_cost")
-    private int assembleCost;
+    private Integer assembleCost;
 
     /**
      * Display the owner of the project
@@ -68,7 +68,7 @@ public class Project implements Serializable {
      * @param assembleCost display an information about assemble cost of the project
      * @param idUser       display an information about owner of the project
      */
-    public Project(int id, String name, String solution, int finalCost, int assembleCost, Integer idUser) {
+    public Project(Integer id, String name, String solution, Integer finalCost, Integer assembleCost, Integer idUser) {
         this.name = name;
         this.solution = solution;
         this.finalCost = finalCost;

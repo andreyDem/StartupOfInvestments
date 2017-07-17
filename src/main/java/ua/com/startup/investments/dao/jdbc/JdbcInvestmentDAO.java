@@ -2,6 +2,7 @@ package ua.com.startup.investments.dao.jdbc;
 
 import com.sun.org.apache.regexp.internal.RE;
 import org.slf4j.Logger;
+import ua.com.startup.investments.connection.ConnectionDB;
 import ua.com.startup.investments.dao.InvestmentDAO;
 import ua.com.startup.investments.entities.Investment;
 
@@ -90,9 +91,9 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
 
     /**
-     * Connection to database
+     * ConnectionDB to database
      */
-    private DataSource dataSource;
+    private ConnectionDB connectionDB;
 
     /**
      * Method saves a new investment in database
@@ -101,7 +102,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
      */
     @Override
     public void createInvestments(Investment investments) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE);
              Statement statement = connection.createStatement()) {
             LOGGER.info("Add new investment in data base ");
@@ -121,7 +122,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
     @Override
     public Investment findById(Integer id_investment) {
         Investment investment = new Investment();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
             LOGGER.info("Find investment by id " + id_investment);
             preparedStatement.setInt(1, Integer.parseInt("ID"));
@@ -148,7 +149,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
     @Override
     public Investment findByUser(Integer id_user) {
         Investment investment = new Investment();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_USER_ID)) {
             LOGGER.info("Find investment by user id " + id_user);
             preparedStatement.setInt(1, id_user);
@@ -173,7 +174,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
     @Override
     public Investment findByPrice(Integer price) {
         Investment investment = new Investment();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_PRICE)) {
             preparedStatement.setInt(1, price);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -197,7 +198,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
     @Override
     public Investment findByProject(Integer id) {
         Investment investment = new Investment();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_PROJECT_ID)) {
             LOGGER.info("Find investment by project id " + id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -219,7 +220,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
      */
     @Override
     public void update(Investment id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
             LOGGER.info("Update investment " + id);
             preparedStatement.setInt(1, Integer.parseInt("SUM"));
@@ -236,7 +237,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
      */
     @Override
     public void delete(Integer id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             LOGGER.info("Delete investment from data base " + id);
             preparedStatement.setInt(1, Integer.parseInt("ID"));
@@ -255,7 +256,7 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
     @Override
     public List findAll() {
         List<Investment> investments = new ArrayList<>();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
             LOGGER.info("Find all users in data base ");
             ResultSet resultSet = preparedStatement.executeQuery();

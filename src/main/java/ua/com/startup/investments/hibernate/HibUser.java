@@ -5,12 +5,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ua.com.startup.investments.dao.UserDAO;
 import ua.com.startup.investments.entities.User;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HibUser implements UserDAO{
+public class HibUser implements UserDAO<User, String, Integer> {
 
     private SessionFactory sessionFactory;
 
@@ -19,17 +17,17 @@ public class HibUser implements UserDAO{
     }
 
     @Override
-    public void save(User user) {
-       try(Session session = sessionFactory.openSession()){
-           session.save(user);
-       }   catch (Exception e) {
-           System.out.println("Exception occurred while trying to save user " + user);
-           e.printStackTrace();
-       }
+    public void createUser(User user) {
+        try (Session session = sessionFactory.openSession()) {
+            session.save(user);
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to save user " + user);
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public User findById(Long id) {
+    public User findById(Integer id) {
         User user = new User(id, "");
         try (Session session = sessionFactory.openSession()) {
             User userFromDB = session.get(User.class, id);
@@ -81,18 +79,18 @@ public class HibUser implements UserDAO{
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(Integer id) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            User userFromDb = session.get(User.class, user.getId());
+            User userFromDb = session.get(User.class, id);
             if (userFromDb == null) {
                 return;
             }
             session.delete(userFromDb);
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Exception occurred while trying to delete user " + user);
+            System.out.println("Exception occurred while trying to delete user with id: " + id);
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();

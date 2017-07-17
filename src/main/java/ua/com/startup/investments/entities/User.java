@@ -63,7 +63,7 @@ public class User {
      * @param phone display phone number of user
      * @param role display role of user
      */
-    public User(long id, String name, String surname, String address, Integer phone, Roles role) {
+    public User(Integer id, String name, String surname, String address, Integer phone, Roles role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -72,14 +72,14 @@ public class User {
         this.role = role;
     }
 
-    public User(long id, String name, String surname, Integer phone) {
+    public User(Integer id, String name, String surname, Integer phone) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
     }
 
-    public User(long id, String name) {
+    public User(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -92,7 +92,7 @@ public class User {
      * @param address display the address of user
      * @param phone display phone number of user
      */
-    public User(int id, String name, String surname, String address, int phone) {
+    public User(Integer id, String name, String surname, String address, int phone) {
         this.id = id;
         this.name = name;
         this.surname = surname;

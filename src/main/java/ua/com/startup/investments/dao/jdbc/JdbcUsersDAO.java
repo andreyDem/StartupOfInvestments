@@ -1,6 +1,7 @@
 package ua.com.startup.investments.dao.jdbc;
 
 import org.slf4j.Logger;
+import ua.com.startup.investments.connection.ConnectionDB;
 import ua.com.startup.investments.dao.UserDAO;
 import ua.com.startup.investments.entities.Roles;
 import ua.com.startup.investments.entities.User;
@@ -60,9 +61,9 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     private static final String FIND_ALL = "SELECT * FROM users";
 
     /**
-     * Connection to database
+     * ConnectionDB to database
      */
-    private DataSource dataSource;
+    private ConnectionDB connectionDB;
 
     /**
      * Method saves a new user in database
@@ -71,7 +72,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
      */
     @Override
     public void createUser(User user) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USER);
              Statement statement = connection.createStatement()) {
             preparedStatement.setString(1, user.getName());
@@ -94,7 +95,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     @Override
     public User findById(Integer id) {
         User foundedUser = new User();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)
         ) {
             preparedStatement.setInt(1, id);
@@ -124,7 +125,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
      */
     @Override
     public User findByName(String name) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
         ) {
             preparedStatement.setString(1, name);
@@ -151,8 +152,8 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
      * @param id a user with new parameters
      */
     @Override
-    public void update(Integer id) {
-        try (Connection connection = dataSource.getConnection();
+    public void update(User user) {
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)
         ) {
             preparedStatement.setString(1, "NAME");
@@ -173,7 +174,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
      */
     @Override
     public void delete(Integer id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE)
         ) {
             preparedStatement.setInt(1, id);
@@ -191,7 +192,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

@@ -1,6 +1,7 @@
 package ua.com.startup.investments.dao.jdbc;
 
 import org.slf4j.Logger;
+import ua.com.startup.investments.connection.ConnectionDB;
 import ua.com.startup.investments.dao.ProjectDAO;
 import ua.com.startup.investments.entities.Project;
 
@@ -64,7 +65,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
      */
     private final static String GET_LAST_INSERTED = "SELECT LAST_INSERT_ID()";
 
-    private DataSource dataSource;
+    private ConnectionDB connectionDB;
 
     /**
      * Method saves a new project in database
@@ -73,7 +74,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
      */
     @Override
     public void createProject(Project project) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE);
              Statement statement = connection.createStatement()) {
             LOGGER.info("Save project in data base");
@@ -99,7 +100,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
     @Override
     public Project findById(Integer id) {
         Project foundedProject = new Project();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)
         ) {
             LOGGER.info("Finding project by id " + id);
@@ -131,7 +132,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
     @Override
     public Project findByName(String name) {
         Project project = new Project();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME)
         ) {
             LOGGER.info("Finding project by name " + name);
@@ -160,7 +161,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
      */
     @Override
     public void update(Project project) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
             LOGGER.info("Update project " + project.getId());
             preparedStatement.setString(1, project.getName());
@@ -181,7 +182,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
      */
     @Override
     public void delete(Integer id) {
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
             LOGGER.info("Delete project " + id);
             preparedStatement.setInt(1, id);
@@ -199,7 +200,7 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
     @Override
     public List findAll() {
         List<Project> projects = new ArrayList<>();
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL)) {
             LOGGER.info("Finding all users ");
             ResultSet resultSet = preparedStatement.executeQuery();
