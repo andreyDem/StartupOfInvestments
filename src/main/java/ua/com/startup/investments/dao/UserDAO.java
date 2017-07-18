@@ -19,7 +19,7 @@ public interface UserDAO<T, H, ID> {
      *
      * @param user an entity for saving in a database
      */
-    void save(T user);
+    void createUser(T user);
 
     /**
      * Method for finding entity in a database by id
@@ -40,9 +40,9 @@ public interface UserDAO<T, H, ID> {
     /**
      * Method for updating entity in a database
      *
-     * @param id an entity with new parameters for updating
+     * @param user an entity with new parameters for updating
      */
-    void update(ID id);
+    void update(T user);
 
     /**
      * Method for deleting entity in a database
