@@ -15,7 +15,7 @@ public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     /**
      * Display the name of the user
@@ -85,13 +85,29 @@ public class User {
     }
 
     /**
+     * Constructor without role
+     * @param id an unique identifier for user.
+     * @param name display the name of user.
+     * @param surname display the surname of user
+     * @param address display the address of user
+     * @param phone display phone number of user
+     */
+    public User(int id, String name, String surname, String address, int phone) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    /**
      * Getters and setters methods by all fields of user.
      */
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
