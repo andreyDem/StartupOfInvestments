@@ -40,7 +40,7 @@ public class ConnectionMySql implements ConnectionDB {
     /**
      * Private default constructor
      */
-    public ConnectionMySql() {
+    private ConnectionMySql() {
     }
 
     /**
@@ -48,7 +48,7 @@ public class ConnectionMySql implements ConnectionDB {
      *
      * @return instance of ConnectionMySql
      */
-    public static ConnectionMySql ConnectionMySql() {
+    public static ConnectionMySql connectionMySql() {
         if (connectionMySql == null) {
             connectionMySql = new ConnectionMySql();
             System.out.println("Instance of connectionMySQL created");
