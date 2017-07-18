@@ -79,11 +79,11 @@ public class Project implements Serializable {
     /**
      * Getters and setters methods by all fields of project.
      */
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -103,19 +103,19 @@ public class Project implements Serializable {
         this.solution = solution;
     }
 
-    public int getFinalCost() {
+    public Integer getFinalCost() {
         return finalCost;
     }
 
-    public void setFinalCost(int finalCost) {
+    public void setFinalCost(Integer finalCost) {
         this.finalCost = finalCost;
     }
 
-    public int getAssembleCost() {
+    public Integer getAssembleCost() {
         return assembleCost;
     }
 
-    public void setAssembleCost(int assembleCost) {
+    public void setAssembleCost(Integer assembleCost) {
         this.assembleCost = assembleCost;
     }
 

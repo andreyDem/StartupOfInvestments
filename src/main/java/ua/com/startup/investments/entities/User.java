@@ -15,7 +15,7 @@ public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     /**
      * Display the name of the user
@@ -92,7 +92,7 @@ public class User {
      * @param address display the address of user
      * @param phone display phone number of user
      */
-    public User(Integer id, String name, String surname, String address, int phone) {
+    public User(Integer id, String name, String surname, String address, Integer phone) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -103,11 +103,11 @@ public class User {
     /**
      * Getters and setters methods by all fields of user.
      */
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -180,7 +180,7 @@ public class User {
      */
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = (Integer) (getId() ^ (getId() >>> 32));
         result = 31 * result + getName().hashCode();
         result = 31 * result + getSurname().hashCode();
         result = 31 * result + getAddress().hashCode();

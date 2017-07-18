@@ -2,6 +2,7 @@ package ua.com.startup.investments.dao.jdbc;
 
 import org.slf4j.Logger;
 import ua.com.startup.investments.connection.ConnectionDB;
+import ua.com.startup.investments.connection.ConnectionMySql;
 import ua.com.startup.investments.dao.UserDAO;
 import ua.com.startup.investments.entities.Roles;
 import ua.com.startup.investments.entities.User;
@@ -64,6 +65,10 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
      * ConnectionDB to database
      */
     private ConnectionDB connectionDB;
+
+    public JdbcUsersDAO(ConnectionDB connectionDB) {
+        this.connectionDB = connectionDB;
+    }
 
     /**
      * Method saves a new user in database
@@ -152,7 +157,7 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
      * @param id a user with new parameters
      */
     @Override
-    public void update(User user) {
+    public void update(Integer id) {
         try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)
         ) {

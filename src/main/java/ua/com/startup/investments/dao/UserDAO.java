@@ -38,16 +38,16 @@ public interface UserDAO<T, H, ID> {
     User findByName(H name);
 
     /**
-     * Method for updating entity in a database
+     * Method for updating entity in a database by id
      *
-     * @param user an entity with new parameters for updating
+     * @param id the id of an entity with new parameters for updating
      */
-    void update(T user);
+    void update(ID id);
 
     /**
-     * Method for deleting entity in a database
+     * Method for deleting entity in a database by id
      *
-     * @param id an entity for delete from DB
+     * @param id the id of an entity for delete from DB
      */
     void delete(ID id);
     

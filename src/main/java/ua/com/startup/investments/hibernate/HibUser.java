@@ -19,7 +19,7 @@ public class HibUser implements UserDAO<User, String, Integer>{
     }
 
     @Override
-    public void save(User user) {
+    public void createUser(User user) {
        try(Session session = sessionFactory.openSession()){
            session.save(user);
        }   catch (Exception e) {

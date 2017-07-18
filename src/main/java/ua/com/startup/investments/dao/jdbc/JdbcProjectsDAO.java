@@ -67,6 +67,10 @@ public class JdbcProjectsDAO implements ProjectDAO<Project, String, Integer> {
 
     private ConnectionDB connectionDB;
 
+    public JdbcProjectsDAO(ConnectionDB connectionDB) {
+        this.connectionDB = connectionDB;
+    }
+
     /**
      * Method saves a new project in database
      *

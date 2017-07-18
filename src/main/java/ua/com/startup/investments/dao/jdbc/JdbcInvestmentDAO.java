@@ -3,6 +3,7 @@ package ua.com.startup.investments.dao.jdbc;
 import com.sun.org.apache.regexp.internal.RE;
 import org.slf4j.Logger;
 import ua.com.startup.investments.connection.ConnectionDB;
+import ua.com.startup.investments.connection.ConnectionMySql;
 import ua.com.startup.investments.dao.InvestmentDAO;
 import ua.com.startup.investments.entities.Investment;
 
@@ -94,6 +95,10 @@ public class JdbcInvestmentDAO implements InvestmentDAO<Investment, Integer> {
      * ConnectionDB to database
      */
     private ConnectionDB connectionDB;
+
+    public JdbcInvestmentDAO(ConnectionDB connectionDB) {
+        this.connectionDB = connectionDB;
+    }
 
     /**
      * Method saves a new investment in database
