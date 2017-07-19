@@ -41,9 +41,9 @@ public interface ProjectDAO<T, H, ID> {
     /**
      * Method for updating entity in a database
      *
-     * @param project an entity with new parameters for updating
+     * @param projectId an entity with new parameters for updating
      */
-    void update(T project);
+    void update(T projectId);
 
     /**
      * Method for deleting entity in a database
