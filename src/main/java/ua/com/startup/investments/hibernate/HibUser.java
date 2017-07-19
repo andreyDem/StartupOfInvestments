@@ -45,18 +45,18 @@ public class HibUser implements UserDAO<User, String, Integer>{
 
     @Override
     public User findByName(String name) {
-        User company = new User(0, name);
+        User user = new User(0, name);
         try (Session session = sessionFactory.openSession()) {
             List<User> users = session.createQuery("select c from User c where c.name like :name")
                     .setParameter("name", name).list();
             if (users.size() != 0) {
-                company = users.get(0);
+                user = users.get(0);
             }
         } catch (Exception e) {
             System.out.println("Exception occurred while trying to find user with name: " + name);
             e.printStackTrace();
         }
-        return company;
+        return user;
     }
 
 
