@@ -6,28 +6,54 @@ import org.hibernate.Transaction;
 import ua.com.startup.investments.dao.UserDAO;
 import ua.com.startup.investments.entities.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HibUser implements UserDAO<User, String, Integer>{
+/**
+ * The class implements a set of methods for working with
+ * database including Hibernate framework, with User entity
+ *
+ * @author Demchuk Andrii
+ */
 
+public class HibUser implements UserDAO<User, String, Integer> {
+
+    /**
+     * An instance of SessionFactory
+     */
     private SessionFactory sessionFactory;
 
+    /**
+     * Constructor
+     *
+     * @param sessionFactory an instance of SessionFactory
+     */
     public HibUser(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * The method create a new user in a database
+     *
+     * @param user a user, which must be create in a database
+     * @return users id if a user was add to database successfully
+     */
     @Override
     public void createUser(User user) {
-       try(Session session = sessionFactory.openSession()){
-           session.save(user);
-       }   catch (Exception e) {
-           System.out.println("Exception occurred while trying to save user " + user);
-           e.printStackTrace();
-       }
+        try (Session session = sessionFactory.openSession()) {
+            session.save(user);
+        } catch (Exception e) {
+            System.out.println("Exception occurred while trying to save user " + user);
+            e.printStackTrace();
+        }
     }
-
+    /**
+     * The method finds a user in database by id of the user
+     *
+     * @param id an id of a user
+     * @return a user with entered id
+     * or new user with empty parameters if user with this id does not exist in the database
+     */
     @Override
     public User findById(Integer id) {
         User user = new User(id, "");
@@ -42,7 +68,13 @@ public class HibUser implements UserDAO<User, String, Integer>{
         }
         return user;
     }
-
+    /**
+     * Method finds a user in a database by name of the user
+     *
+     * @param name is a name of a user
+     * @return a user with entered name
+     * or new user with empty parameters if user with this name does not exist in the database
+     */
     @Override
     public User findByName(String name) {
         User user = new User(0, name);
@@ -59,9 +91,12 @@ public class HibUser implements UserDAO<User, String, Integer>{
         return user;
     }
 
-
-
-
+    /**
+     * The method updates a user in a database
+     * (finds user in a database by id and overwrites other fields)
+     *
+     * @param user is a user with new parameters
+     */
     @Override
     public void update(User user) {
         Transaction transaction = null;
@@ -86,7 +121,11 @@ public class HibUser implements UserDAO<User, String, Integer>{
             }
         }
     }
-
+    /**
+     * The method removes a user from a database
+     *
+     * @param user is a user which must be removed
+     */
     @Override
     public void delete(User user) {
         Transaction transaction = null;
@@ -106,7 +145,11 @@ public class HibUser implements UserDAO<User, String, Integer>{
             }
         }
     }
-
+    /**
+     * The method returns all users from a database
+     *
+     * @return list of all users from a database
+     */
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
