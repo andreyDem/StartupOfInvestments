@@ -63,18 +63,23 @@ public class HibUser implements UserDAO<User, String, Integer>{
 
 
     @Override
-    public void update(Integer id) {
+    public void update(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            User userFromDb = session.get(User.class, id);
+            User userFromDb = session.get(User.class, user.getId());
             if (userFromDb == null) {
                 return;
             }
+            userFromDb.setName(user.getName());
+            userFromDb.setSurname(user.getSurname());
+            userFromDb.setAddress(user.getAddress());
+            userFromDb.setPhone(user.getPhone());
+            userFromDb.setRole(user.getRole());
             session.update(userFromDb);
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Exception occurred while trying to update user id = " + id);
+            System.out.println("Exception occurred while trying to update user " + user.getName());
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
@@ -83,18 +88,18 @@ public class HibUser implements UserDAO<User, String, Integer>{
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            User userFromDb = session.get(User.class, id);
+            User userFromDb = session.get(User.class, user.getId());
             if (userFromDb == null) {
                 return;
             }
             session.delete(userFromDb);
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("Exception occurred while trying to delete user id = " + id);
+            System.out.println("Exception occurred while trying to delete user id = " + user.getName());
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();

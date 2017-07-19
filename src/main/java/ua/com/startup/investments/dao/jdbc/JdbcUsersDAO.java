@@ -154,10 +154,10 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     /**
      * Method updates user in the database
      *
-     * @param id a user with new parameters
+     * @param user a user with new parameters
      */
     @Override
-    public void update(Integer id) {
+    public void update(User user) {
         try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)
         ) {
@@ -175,14 +175,14 @@ public class JdbcUsersDAO implements UserDAO<User, String, Integer> {
     /**
      * Method removes an user from database
      *
-     * @param id user which must be removed
+     * @param user user which must be removed
      */
     @Override
-    public void delete(Integer id) {
+    public void delete(User user) {
         try (Connection connection = (Connection) connectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE)
         ) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
