@@ -20,18 +20,22 @@ public class Investment implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Integer id;
 
     /**
      * Display an amount of the investment
      */
     @Column(name = "sum")
-    private int sum;
+    private Integer sum;
 
     /**
      * The default constructor of entities investments.
      */
     public Investment() {
+    }
+
+    public Investment(Integer sum) {
+        this.sum = sum;
     }
 
     /**
@@ -40,7 +44,7 @@ public class Investment implements Serializable {
      * @param id  a unique identifier for order.
      * @param sum display general amount of investment.
      */
-    public Investment(int id, int sum) {
+    public Investment(Integer id, Integer sum) {
         this.id = id;
         this.sum = sum;
     }
@@ -48,19 +52,19 @@ public class Investment implements Serializable {
     /**
      * Getters and setters methods by all fields of investment.
      */
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getSum() {
+    public Integer getSum() {
         return sum;
     }
 
-    public void setSum(int sum) {
+    public void setSum(Integer sum) {
         this.sum = sum;
     }
 

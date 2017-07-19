@@ -11,15 +11,11 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
-
-    /**
-     * Display the unique identifier for each user.
-     */
+public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Integer id;
 
     /**
      * Display the name of the user
@@ -43,11 +39,12 @@ public class User implements Serializable{
      * Display the phone number of the user
      */
     @Column(name = "phone")
-    private int phone;
+    private Integer phone;
 
     /**
      * Display the identifier for each user role.
      */
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Roles role;
 
@@ -66,7 +63,7 @@ public class User implements Serializable{
      * @param phone display phone number of user
      * @param role display role of user
      */
-    public User(int id, String name, String surname, String address, int phone, Roles role) {
+    public User(Integer id, String name, String surname, String address, Integer phone, Roles role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -75,14 +72,42 @@ public class User implements Serializable{
         this.role = role;
     }
 
+    public User(Integer id, String name, String surname, Integer phone) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+    }
+
+    public User(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    /**
+     * Constructor without role
+     * @param id an unique identifier for user.
+     * @param name display the name of user.
+     * @param surname display the surname of user
+     * @param address display the address of user
+     * @param phone display phone number of user
+     */
+    public User(Integer id, String name, String surname, String address, Integer phone) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.phone = phone;
+    }
+
     /**
      * Getters and setters methods by all fields of user.
      */
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -110,11 +135,11 @@ public class User implements Serializable{
         this.address = address;
     }
 
-    public int getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 
@@ -155,7 +180,7 @@ public class User implements Serializable{
      */
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
+        int result = (Integer) (getId() ^ (getId() >>> 32));
         result = 31 * result + getName().hashCode();
         result = 31 * result + getSurname().hashCode();
         result = 31 * result + getAddress().hashCode();

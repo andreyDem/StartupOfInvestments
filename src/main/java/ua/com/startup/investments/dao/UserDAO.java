@@ -12,7 +12,8 @@ import java.util.List;
  * @author Girya Aleksey
  */
 
-public interface UserDAO<T> {
+
+public interface UserDAO<T, H, ID> {
     /**
      * Method for creating a new entity in a database
      *
@@ -26,7 +27,7 @@ public interface UserDAO<T> {
      * @param id the id of an entity
      * @return founded entity of User
      */
-    User findById(T id);
+    User findById(ID id);
 
     /**
      * Method for finding entity in a database by id
@@ -34,21 +35,21 @@ public interface UserDAO<T> {
      * @param name the id of an entity
      * @return founded entity of User
      */
-    User findByName(T name);
+    User findByName(H name);
 
     /**
      * Method for updating entity in a database
      *
-     * @param id an entity with new parameters for updating
+     * @param user the id of an entity with new parameters for updating
      */
-    void update(T id);
+    void update(T user);
 
     /**
      * Method for deleting entity in a database
      *
-     * @param id an entity for delete from DB
+     * @param user the id of an entity for delete from DB
      */
-    void delete(T id);
+    void delete(T user);
     
     /**
      * Method for getting all entities of a certain type

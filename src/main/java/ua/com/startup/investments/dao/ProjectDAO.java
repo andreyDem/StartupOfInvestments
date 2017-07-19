@@ -13,7 +13,7 @@ import java.util.List;
  * @author Girya Aleksey
  */
 
-public interface ProjectDAO<T> {
+public interface ProjectDAO<T, H, ID> {
 
     /**
      * Method for creating a new entity in a database
@@ -28,7 +28,7 @@ public interface ProjectDAO<T> {
      * @param id the id of an entity
      * @return founded entity of Project
      */
-    Project findById(T id);
+    Project findById(ID id);
 
     /**
      * Method for finding entity in a database by id
@@ -36,21 +36,21 @@ public interface ProjectDAO<T> {
      * @param name the id of an entity
      * @return founded entity of Project
      */
-    Project findByName(T name);
+    Project findByName(H name);
 
     /**
      * Method for updating entity in a database
      *
-     * @param id an entity with new parameters for updating
+     * @param project an entity with new parameters for updating
      */
-    void update(T id);
+    void update(T project);
 
     /**
      * Method for deleting entity in a database
      *
      * @param id an entity for delete from DB
      */
-    void delete(T id);
+    void delete(ID id);
 
     /**
      * Method for getting all entities of a certain type
